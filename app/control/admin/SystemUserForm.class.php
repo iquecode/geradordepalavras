@@ -29,10 +29,26 @@ class SystemUserForm extends TPage
         // create the form fields
         $id            = new TEntry('id');
         $name          = new TEntry('name');
+        $email         = new TEntry('email');
         $login         = new TEntry('login');
         $password      = new TPassword('password');
         $repassword    = new TPassword('repassword');
-        $email         = new TEntry('email');
+        $cpf           = new TEntry('cpf');
+        $cep = new TEntry('cep');
+        $address = new TEntry('address');
+        $number        = new TEntry('number');
+        $complement    = new TEntry('complement');    
+        $city = new TEntry('city');
+        $uf = new TDBCombo('uf', 'permission', 'State', 'uf', 'name', 'id');
+        $code_transaction = new TEntry('code_transaction');
+        $phone =  new TEntry('phone');
+        $date_contract = new TDate('date_contract');
+        $date_expiration = new TDate('date_expiration');
+        $days_contract = new TCombo('days_contract');        
+        $status = new TEntry('status');
+        $obs = new TText('obs');
+        
+        
         $unit_id       = new TDBCombo('system_unit_id','permission','SystemUnit','id','name');
         $groups        = new TDBCheckGroup('groups','permission','SystemGroup','id','name');
         $frontpage_id  = new TDBUniqueSearch('frontpage_id', 'permission', 'SystemProgram', 'id', 'name', 'name');
@@ -64,10 +80,30 @@ class SystemUserForm extends TPage
         // define the sizes
         $id->setSize('50%');
         $name->setSize('100%');
+        $email->setSize('100%');
         $login->setSize('100%');
         $password->setSize('100%');
         $repassword->setSize('100%');
-        $email->setSize('100%');
+        
+        
+        $cpf->setSize('100%');
+        
+        $cep->setSize('100%');
+        $address->setSize('100%');
+//         $number        = new TEntry('number');
+//         $complement    = new TEntry('complement');    
+//         $city = new TEntry('city');
+//         $uf = new TDBCombo('uf', 'tattini', 'State', 'uf', 'name', 'id');
+//         $code_transaction = new TEntry('code_transaction');
+//         $phone =  new TEntry('phone');
+//         $date_contract = new TDate();
+//         $date_expiration = new TDate();
+//         $days_contract = new TCombo('days_contract');        
+//         $status = new TEntry('status');
+//         $obs = new TText('obs');
+        
+        
+        
         $unit_id->setSize('100%');
         $frontpage_id->setSize('100%');
         $frontpage_id->setMinLength(1);
@@ -84,6 +120,27 @@ class SystemUserForm extends TPage
         $this->form->addFields( [new TLabel(_t('Login'))], [$login],  [new TLabel(_t('Email'))], [$email] );
         $this->form->addFields( [new TLabel(_t('Main unit'))], [$unit_id],  [new TLabel(_t('Front page'))], [$frontpage_id] );
         $this->form->addFields( [new TLabel(_t('Password'))], [$password],  [new TLabel(_t('Password confirmation'))], [$repassword] );
+        $this->form->addFields( [new TLabel('CPF:')],       [$cpf] );
+        $this->form->addFields( [new TLabel('Telefone:')],  [$phone] );
+        
+        $this->form->addFields([new TLabel('Contratação:')],  [$date_contract] );
+        $this->form->addFields([new TLabel('Plano:')],  [$days_contract] );
+        $this->form->addFields([new TLabel('Expiração:')],  [$date_expiration] );
+        $this->form->addFields([new TLabel('Cod. Transação:')],  [$code_transaction] );
+        $this->form->addFields([new TLabel('Status:')],  [$status] );
+        
+        $this->form->addFields( [new TFormSeparator('Endereço')] );
+        $this->form->addFields( [new TLabel('CEP')],        [$cep] ); 
+        $this->form->addFields( [new TLabel('Rua')],        [$address] );
+        $this->form->addFields( [new TLabel('Nº')],          [$number],
+                                [new TLabel('Complemento')], [$complement] );
+        $this->form->addFields( [new TLabel('Cidade:')],    [$city], 
+                                [new TLabel('UF:')],        [$uf]);
+        
+        $this->form->addFields( [new TFormSeparator('Obs.')] );
+        $this->form->addFields( [new TLabel('Obs.')],        [$obs] );
+        
+        
         $this->form->addFields( [new TFormSeparator(_t('Units'))] );
         $this->form->addFields( [$units] );
         $this->form->addFields( [new TFormSeparator(_t('Groups'))] );
@@ -177,7 +234,8 @@ class SystemUserForm extends TPage
                 if( $object->password !== $param['repassword'] )
                     throw new Exception(_t('The passwords do not match'));
                 
-                $object->password = md5($object->password);
+                //$object->password = md5($object->password);
+                $object->password = password_hash($object->password, PASSWORD_DEFAULT);
             }
             else
             {

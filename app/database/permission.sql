@@ -17,14 +17,35 @@ CREATE TABLE system_preference (
     value text
 );
 
+
+
+
 CREATE TABLE system_user (
     id INTEGER PRIMARY KEY NOT NULL,
-    name varchar(100),
     login varchar(100),
-    password varchar(100),
+    password text,
     email varchar(100),
+    name varchar(100),
+    cpf varchar(20),
+    cep varchar(20), 
+    address varchar(100),
+    `number` varchar(20),
+    complement varchar(100),
+    city varchar(100),
+    uf varchar(2),
+    code_transaction varchar(100), 
+    phone varchar(20),
+    status int,
+    date_contract date,
+    date_expiration date,
+    days_contract int,
+    obs text,
+    last_try_login timestamp,
+    try_login int,
+    login_block int,
     frontpage_id int, system_unit_id int references system_unit(id), active char(1),
     FOREIGN KEY(frontpage_id) REFERENCES system_program(id));
+    
     
 CREATE TABLE system_user_unit (
     id INTEGER PRIMARY KEY NOT NULL,
@@ -98,8 +119,9 @@ INSERT INTO system_program VALUES(38,'System Administration Dashboard','SystemAd
 INSERT INTO system_program VALUES(39,'System Log Dashboard','SystemLogDashboard');
 INSERT INTO system_program VALUES(40,'System Session dump','SystemSessionDumpView');
 
-INSERT INTO system_user VALUES(1,'Administrator','admin','21232f297a57a5a743894a0e4a801fc3','admin@admin.net',10,NULL,'Y');
-INSERT INTO system_user VALUES(2,'User','user','ee11cbb19052e40b07aac0ca060c23ee','user@user.net',7,NULL,'Y');
+INSERT INTO system_user VALUES(1,'admin','21232f297a57a5a743894a0e4a801fc3','admin@admin.net','Administrador','000.000.000-00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 9,  NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, NULL,'Y');
+INSERT INTO system_user VALUES(2,'User', 'ee11cbb19052e40b07aac0ca060c23ee','user@admin.net', 'User','111.111.111-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 9,  NULL, NULL, NULL, NULL, NULL, NULL, NULL, 7, NULL,'Y');
+
 
 INSERT INTO system_unit VALUES(1,'Unit A','unit_a');
 INSERT INTO system_unit VALUES(2,'Unit B','unit_b');

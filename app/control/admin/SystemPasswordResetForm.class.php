@@ -120,7 +120,8 @@ class SystemPasswordResetForm extends TPage
                 }
                 else
                 {
-                    $user->password = md5($param['password1']);
+                    //$user->password = md5($param['password1']);
+                    $user->password = password_hash($param['password1'], PASSWORD_DEFAULT);
                     $user->store();
                     
                     new TMessage('info', _t('The password has been changed'));

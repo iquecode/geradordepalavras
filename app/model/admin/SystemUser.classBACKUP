@@ -29,27 +29,10 @@ class SystemUser extends TRecord
     public function __construct($id = NULL)
     {
         parent::__construct($id);
-      
+        parent::addAttribute('name');
         parent::addAttribute('login');
         parent::addAttribute('password');
         parent::addAttribute('email');
-        parent::addAttribute('name');
-        parent::addAttribute('cpf');
-        parent::addAttribute('cep');
-        parent::addAttribute('address');
-        parent::addAttribute('number');
-        parent::addAttribute('complement');
-        parent::addAttribute('city');
-        parent::addAttribute('code_transaction');
-        parent::addAttribute('phone');
-        parent::addAttribute('status');
-        parent::addAttribute('date_contract');
-        parent::addAttribute('date_expiration');
-        parent::addAttribute('days_contract');
-        parent::addAttribute('obs');
-        parent::addAttribute('last_try_login');
-        parent::addAttribute('try_login');
-        parent::addAttribute('login_block');
         parent::addAttribute('frontpage_id');
         parent::addAttribute('system_unit_id');
         parent::addAttribute('active');
@@ -317,58 +300,12 @@ class SystemUser extends TRecord
      */
     public static function authenticate($login, $password)
     {
-        $user         = self::newFromLogin($login);
-//         $user_control = new SystemUser($user->id)
-        // if (!hash_equals($user->password, md5($password)))
-        // {
-        //     throw new Exception(_t('Wrong password'));
-        // }
-        
-        
-        $login_block    = $user->login_block;
-        $now            = new DateTime('NOW');
-        
-        if ($login_block == 1)
+        $user = self::newFromLogin($login);
+        if (!hash_equals($user->password, md5($password)))
         {
-            
-            $last_try_login = new DateTime($user->last_try_login);
-            $diff = $last_try_login->diff($now);
-            $diff_minutes = ($diff->h * 60) + $diff->i;
-            if ($diff_minutes < 1)
-            {
-                throw new Exception('Acesso bloqueado! Aguarde 15 minutos e tente novamente.');
-            }
-            else
-            {
-                $user->login_block = 0;
-                $user->try_login = 0;
-               
-                UserControlLogin::store($user);
-//                 $user->store();
-                //$user = self::newFromLogin($login);
-            } 
+            throw new Exception(_t('Wrong password'));
         }
         
-        if (  !password_verify($password, $user->password)  )
-        {    
-            $try_login = $user->try_login;
-            $try_login++;
-            $user->try_login = $try_login;
-            $msg = '';
-            if ($try_login >= 5)
-            {
-                $user->login_block = 1;  
-                $user->last_try_login = $now->format('Y-m-d H:i:s');
-                $msg = ' - acesso bloqueado por 15 minutos por excesso de tentativas inválidas.';    
-            }
-            //$user->name= 'teste';
-//             $user->store();
-            UserControlLogin::store($user);
-            throw new Exception('Senha incorreta' . $msg);
-        }
-        
-        $user->try_login = 0;
-        UserControlLogin::store($user);
         return $user;
     }
     
