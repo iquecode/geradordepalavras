@@ -55,3 +55,117 @@ Adianti.onAfterLoad = function(url, data)
 
 // set select2 language
 $.fn.select2.defaults.set('language', $.fn.select2.amd.require("select2/i18n/pt"));
+
+
+
+//********* a partir daqui customisado por iquedev */
+
+function maskPhone()
+{
+
+const masks = {
+    cpf (value) {
+      return value
+        .replace(/\D+/g, '')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+        .replace(/(-\d{2})\d+?$/, '$1')
+    },
+  
+    cnpj (value) {
+      return value
+        .replace(/\D+/g, '')
+        .replace(/(\d{2})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1/$2')
+        .replace(/(\d{4})(\d)/, '$1-$2')
+        .replace(/(-\d{2})\d+?$/, '$1')
+    },
+  
+    phone (value) {
+      return value
+        .replace(/\D+/g, '')
+        .replace(/(\d{2})(\d)/, '($1) $2')
+        .replace(/(\d{4})(\d)/, '$1-$2')
+        .replace(/(\d{4})-(\d)(\d{4})/, '$1$2-$3')
+        .replace(/(-\d{4})\d+?$/, '$1')
+    },
+  
+    cep (value) {
+      return value
+        .replace(/\D+/g, '')
+        .replace(/(\d{5})(\d)/, '$1-$2')
+        .replace(/(-\d{3})\d+?$/, '$1')
+    },
+  
+    pis (value) {
+      return value
+        .replace(/\D+/g, '')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{5})(\d)/, '$1.$2')
+        .replace(/(\d{5}\.)(\d{2})(\d)/, '$1$2-$3')
+        .replace(/(-\d)\d+?$/, '$1')
+    },
+  
+    money (value) {
+      const cleanValue = +value.replace(/\D+/g, '')
+      const options = { style: 'currency', currency: 'BRL' }
+      return new Intl.NumberFormat('pt-br', options).format(cleanValue / 100)
+    },
+    
+    name (value) {
+      return value
+        .replace(/[^a-zA-Z ]/g, "");
+    }
+    
+  }
+  
+  document.querySelectorAll('input').forEach($input => {
+    const field = $input.dataset.mask_ique
+  
+    $input.addEventListener('input', e => {
+      e.target.value = masks[field](e.target.value)
+    }, false)
+
+  })
+    
+}
+
+
+
+function autoCep()
+{
+
+    // $date_input = document.querySelectorAll('[name="date[]"]');
+    // $type_input = document.querySelectorAll('[name="type[]"]');
+    // $date_input[i].value = date;
+    // $type_input[i].value = type;
+
+  const cep = document.querySelector('[auto_cep="cep"]')
+
+  const showData = (result)=>{
+      for(const campo in result){
+          if(document.querySelector(`[auto_cep="${campo}"]`)){
+              document.querySelector(`[auto_cep="${campo}"]`).value = result[campo]
+          }
+      }
+  }
+
+  cep.addEventListener("blur",(e)=>{
+      let search = cep.value
+                      .replace("-","")
+                      .replace(".","")
+      const options = {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'default'
+      }
+
+      fetch(`https://viacep.com.br/ws/${search}/json/`, options)
+      .then(response =>{ response.json()
+          .then( data => showData(data))
+      })
+      .catch(e => console.log('Erro (autocep): '+ e,message))
+  })
+}

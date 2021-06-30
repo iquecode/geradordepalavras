@@ -249,7 +249,7 @@ class SystemUserList extends TStandardList
             $user = SystemUser::validate( $param['login'] );
             ApplicationAuthenticationService::loadSessionVars($user);
             SystemAccessLogService::registerLogin(true);
-            AdiantiCoreApplication::gotoPage('EmptyPage');
+            AdiantiCoreApplication::gotoPage('WordGeneratorView');
             TTransaction::close();
         }
         catch (Exception $e)
