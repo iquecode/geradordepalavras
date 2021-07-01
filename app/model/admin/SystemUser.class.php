@@ -40,6 +40,7 @@ class SystemUser extends TRecord
         parent::addAttribute('number');
         parent::addAttribute('complement');
         parent::addAttribute('city');
+        parent::addAttribute('uf');
         parent::addAttribute('code_transaction');
         parent::addAttribute('phone');
         parent::addAttribute('status');

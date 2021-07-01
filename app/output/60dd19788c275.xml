@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+  <SystemUser>
+    <id>1</id>
+    <name>Administrador</name>
+    <login>admin</login>
+    <email>admin@admin.net</email>
+    <active>Y</active>
+  </SystemUser>
+  <SystemUser>
+    <id>2</id>
+    <name>User</name>
+    <login>User</login>
+    <email>user@admin.net</email>
+    <active>Y</active>
+  </SystemUser>
+  <SystemUser>
+    <id>3</id>
+    <name>Henrique Finco Mariani</name>
+    <login>hemariani@gmail.com</login>
+    <email>hemariani@gmail.com</email>
+    <active>Y</active>
+  </SystemUser>
+</dataset>

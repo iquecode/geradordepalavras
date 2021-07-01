@@ -418,4 +418,7 @@ function copyCombinations(e)
 
 }
 
+
+
+
 //teste3();

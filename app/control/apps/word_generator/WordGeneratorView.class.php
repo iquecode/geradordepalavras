@@ -8,8 +8,6 @@ class WordGeneratorView extends TPage
     public function __construct()
     {
         parent::__construct();
-        
-        
         try
         {
             TTransaction::open('permission');
@@ -44,30 +42,13 @@ class WordGeneratorView extends TPage
         catch (Exception $e)
         {
             new TMessage('error', $e->getMessage());
-        }
-        
-        
-        
-        
-        
-      //  $this->html = new THtmlRenderer('app/resources/word_genetaror.html');
-        
-//         $replaces = [];
-//         $replaces['title']  = 'Panel title';
-//         $replaces['footer'] = 'Panel footer';
-//         $replaces['name']   = 'Someone famous';
-        
-        // replace the main section variables
-//         $this->html->enableSection('main', $replaces);
-        
-//         $this->html->enableSection('main');
-        
-        
-        // wrap the page content using vertical box
-//         $vbox = new TVBox;
-//         $vbox->style = 'width: 100%';
-//         $vbox->add(new TXMLBreadCrumb('menu.xml', __CLASS__));
-//         $vbox->add($this->html);
-//         parent::add($vbox);            
+        }  
     }
+    
+    public function onReload()
+    {
+    
+    
+    }
+    
 }

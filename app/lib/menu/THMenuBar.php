@@ -60,6 +60,14 @@ class THMenuBar extends TElement
                 }
             }
             
+            // $label  = 'Avisos';
+            // $action = '';
+            // $icon   = ''; 
+            // $item = new THMenuItem($label, $action, $icon);
+            // // $item->setMenu($menu);
+            // // $item->{'class'} = 'nav-item dropdown';
+            // $ul->add($item);
+
             return $menubar;
         }
     }

@@ -169,3 +169,35 @@ function autoCep()
       .catch(e => console.log('Erro (autocep): '+ e,message))
   })
 }
+
+
+function includeNotificationMenu()
+{
+    const navMenu = document.querySelector('.iquedev-wrapper-info-header');
+    const onclick = 'onclick="iquedevOpenModal(' + "'iquedev-modal-notification')" + '"';
+                                                     
+
+    //let content = '<div class="nav-item dropdown"><a id="iquedev-link-notification" class="dropdown-item"><span style="padding-left:4px">Avisos</span></a></div>';
+    let content = '<div class="nav-item dropdown"><a id="iquedev-link-notification" class="dropdown-item"><span style="padding-left:4px" ' + onclick + '>Avisos</span></a></div>';
+    navMenu.insertAdjacentHTML("afterbegin", content);
+}
+
+
+
+
+function iquedevOpenModal(mn){
+  const modal = document.getElementById(mn);
+  if (typeof modal == 'undefined' || modal === null)
+      return;
+ 
+  modal.style.display = 'Block';
+  $("#html").addClass("on-hide-scroll"); 
+}
+
+function iquedevCloseModal(mn){
+  const modal = document.getElementById(mn);
+  if (typeof modal == 'undefined' || modal === null)
+      return;
+  modal.style.display = 'none';
+  $("#html").removeClass("on-hide-scroll");
+}

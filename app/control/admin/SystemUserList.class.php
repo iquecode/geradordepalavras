@@ -50,7 +50,7 @@ class SystemUserList extends TStandardList
         $this->form->addFields( [new TLabel('Id')], [$id] );
         $this->form->addFields( [new TLabel(_t('Name'))], [$name] );
         $this->form->addFields( [new TLabel(_t('Email'))], [$email] );
-        $this->form->addFields( [new TLabel(_t('Active'))], [$active] );
+        $this->form->addFields( [new TLabel('Login Ativo')], [$active] );
         
         $id->setSize('30%');
         $name->setSize('70%');
@@ -77,7 +77,9 @@ class SystemUserList extends TStandardList
         $column_name = new TDataGridColumn('name', _t('Name'), 'left');
         $column_login = new TDataGridColumn('login', _t('Login'), 'left');
         $column_email = new TDataGridColumn('email', _t('Email'), 'left');
-        $column_active = new TDataGridColumn('active', _t('Active'), 'center');
+        $column_date_expiration = new TDataGridColumn('date_expiration', 'Data Expiração', 'left');
+        $column_expiration =      new TDataGridColumn('date_expiration', 'Dias restantes',       'center');
+        $column_active = new TDataGridColumn('active', 'Login ativo', 'center');
         
         $column_login->enableAutoHide(500);
         $column_email->enableAutoHide(500);
@@ -87,6 +89,8 @@ class SystemUserList extends TStandardList
         $this->datagrid->addColumn($column_name);
         $this->datagrid->addColumn($column_login);
         $this->datagrid->addColumn($column_email);
+        $this->datagrid->addColumn($column_date_expiration);
+        $this->datagrid->addColumn($column_expiration);
         $this->datagrid->addColumn($column_active);
 
         $column_active->setTransformer( function($value, $object, $row) {
@@ -98,6 +102,34 @@ class SystemUserList extends TStandardList
             $div->add($label);
             return $div;
         });
+        
+        
+        
+        $column_expiration->setTransformer( function($value, $object, $row) {  
+            $expiration = new DateTime($value);
+            $today = new DateTime(date('Y-m-d')); 
+            $date_diff = $today->diff($expiration);
+            $days = $date_diff->format('%a');
+            $class = ($today<=$expiration) ? ''     : 'danger';
+            
+            if ($today<=$expiration && $days <= 5)
+            {
+                $class = 'warning';
+            }
+            //$class = ($days > 5 && !$today<=$expiration) ? $class : 'warning';
+            
+            $label = ($today<=$expiration) ?  $days  : 'Expirado';
+            $label = ($value != '' && $value != null) ?    $label : '';
+           
+           
+            $div = new TElement('span');
+            $div->class="label label-{$class}";
+            $div->style="text-shadow:none; font-size:12px; font-weight:lighter;";
+            $div->add($label);
+            return $div;
+        });
+        
+        
         
         // creates the datagrid column actions
         $order_id = new TAction(array($this, 'onReload'));
@@ -115,6 +147,10 @@ class SystemUserList extends TStandardList
         $order_email = new TAction(array($this, 'onReload'));
         $order_email->setParameter('order', 'email');
         $column_email->setAction($order_email);
+        
+        $order_data_expiration = new TAction(array($this, 'onReload'));
+        $order_data_expiration->setParameter('order', 'date_expiration');
+        $column_date_expiration->setAction($order_data_expiration);
         
 
         

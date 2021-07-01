@@ -259,6 +259,10 @@ class SystemUserForm extends TPage
     {
         try
         {
+            
+//             extract($param);
+            //new TMessage('info', $param['uf']);
+            
             // open a transaction with database 'permission'
             TTransaction::open('permission');
             
@@ -267,6 +271,8 @@ class SystemUserForm extends TPage
             
             $object = new SystemUser;
             $object->fromArray( (array) $data );
+            
+           
             
             $senha = $object->password;
             
@@ -311,7 +317,7 @@ class SystemUserForm extends TPage
             
             //iquedev
             $object->frontpage_id = 41; // WordGeneratorView
-            
+//             $object->uf = param['uf'];
             
             
             $object->store();

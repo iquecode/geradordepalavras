@@ -30,6 +30,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     
+    
+    
   </head>
   <body class="hold-transition skin-blue-light sidebar-mini layout-boxed">
 
@@ -51,25 +53,16 @@
                  
                </div>
               </div>
+              
+              
+              
+             
 
 
               
               {MENU} 
-
-              <!-- <div class="navbar" style="margin: 0;">
-                <div class="iquedev-wrapper-info-header">
-                  <div class="iquedev-user-header">
-                    <a href="index.php?class=SystemProfileView">{username}</a>
-                  </div>
-                  <div class="iquedev-logout-header">
-                       <a href="index.php?class=LoginForm&method=onLogout">Logout</a>  
-                  </div>
-                  </div>
               
-              
-              
-              
-              </div> -->
+             
 
 
               
@@ -84,12 +77,15 @@
 
 
 
-
+      
       <div id="adianti_div_content" class="content">
       </div>
+
+      
+     
       <div id="adianti_online_content"></div>
-<div id="adianti_online_content2"></div>
-<div id="adianti_right_panel" class="right-panel"></div>
+      <div id="adianti_online_content2"></div>
+      <div id="adianti_right_panel" class="right-panel"></div>
       
 
 
@@ -113,11 +109,46 @@
 
   </div>
 
+
+<!-- Modal elements -->
+<div id="iquedev-modal-notification" class="iquedev-modal" onclick="iquedevCloseModal('iquedev-modal-notification')">
+  <div class="iquedev-modal-content"> 
+ 
+    
+     <button class="iquedev-close" onclick="iquedevCloseModal('iquedev-modal-notification')">x</button>
+    
+    
+      <div class="iquedev-modal-header">
+          <p class="iquedev-modal-title">Aviso<p>
+      </div>    
+      <div class="iquedev-modal-body">
+        {NOTIFICATION}
+      </div>
+  </div>
+</div>
+<!-- end modal elements -->
+
+
+
   <!-- <script src="script.js"></script> -->
 
     <!-- AdminLTE App -->
     <script src="app/templates/{template}/js/script.js"></script>
     <!-- <script src="app/templates/{template}/js/app.min.js"></script>
     <script src="app/templates/{template}/js/custom.js"></script>  -->
+  
+    {SCRIPT_INCLUIDE_NOTIFICATION_MENU}
+    <!-- <script>includeNotificationMenu()</script> -->
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   </body>
 </html>

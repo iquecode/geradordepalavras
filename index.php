@@ -32,6 +32,20 @@ else
 $content = ApplicationTranslator::translateTemplate($content);
 $content = AdiantiTemplateParser::parse($content);
 
+$notification = '';
+TTransaction::open('permission');
+$notification = SystemPreference::getPreference('notification');
+TTransaction::close(); 
+$content = str_replace('{NOTIFICATION}', $notification, $content);
+
+$script_notification_menu = '';
+if ( $notification != '' ) 
+{
+    $script_notification_menu = '<script>includeNotificationMenu()</script>';
+}
+$content = str_replace('{SCRIPT_INCLUIDE_NOTIFICATION_MENU}', $script_notification_menu, $content);
+
+
 echo $content;
 
 if (TSession::getValue('logged') OR $public)

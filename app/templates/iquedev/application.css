@@ -256,6 +256,12 @@ header {
     font-weight: bold;
 }
 
+#iquedev-link-notification {
+    color: #4527A0;
+    cursor: pointer;
+    
+}
+
 .iquedev-logo-header {
     font-style: italic;
 }
@@ -359,13 +365,15 @@ a {
     display: flex;
 }
 
-.btn {
+/* .btn {
     background-color: #4527A0 !important;
     border-color: #4527A0 !important;
     border-radius: 10px !important;
-    color: white !important;
-    min-width: 100px !important;
-}
+    color: white !important; */
+    /* min-width: 100px !important;
+} */
+
+
 
 input, select {
     border-radius: 10px !important;
@@ -377,9 +385,19 @@ label, td, th, .panel-title, .card-title, li, h1, h2, h3, h4, h5 ,h6 {
     color: #757575;
 }
 
-.btn-default {
-    background-color: #757575 !important;
+/* .btn-default {
+    background-color: #757575;
+} */
+
+.btn-primary {
+    background-color: #4527A0 !important;
+    border-color: #4527A0 !important;
+    /* border-radius: 10px !important; */
+    color: white !important;
 }
+
+
+
 
 #form_login .panel-footer {
     background-color: white !important;
@@ -400,3 +418,115 @@ label, td, th, .panel-title, .card-title, li, h1, h2, h3, h4, h5 ,h6 {
     background-color: white;
     border-color: white;
 }
+
+
+
+
+
+
+/* Estilos Modal Notificações */
+.iquedev-modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .5);
+    display: none;
+}
+
+.iquedev-modal-content{
+    position: relative;
+    margin: 0 auto;
+    padding: 0px;
+    box-shadow: 0 0 2px #fff;
+    margin-top: 20%;
+    max-width: 700px; 
+    text-align: justify;
+    background-color: #FAFAFA;
+    color: #757575;
+    border-radius: 5px;
+    /* background-color: white; */
+}
+
+
+/* .modal-content-alert{
+    margin-top: 13%;
+    max-width: 700px;
+    color:black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+    font-size: 0.9em;
+} */
+
+/* .modal-content-alert strong, .modal-content-privacy b, .modal-content-privacy strong, .modal-content-alert b
+{
+    font-weight: bold !important;
+} */
+
+/* .modal-content-privacy 
+{
+    color: black;
+} */
+
+.iquedev-modal-header, .iquedev-modal-body, .iquedev-modal-footer {
+    padding: 10px;
+}
+
+/* .iquedev-modal-header {
+    padding: 0px;
+} */
+
+
+.iquedev-modal-header {
+    display: flex;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    background-color: #4527A0 !important;
+    color: white;
+    font-weight: 600 !important;
+    font-size: 1.1em !important;
+    width: 100%;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.iquedev-modal-title {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: 100%;
+}
+
+.iquedev-modal-title
+{
+    padding: 0px !important;
+    font-weight: 600 !important;
+}
+/* 
+.on-hide-scroll
+{
+    overflow:hidden;
+}   */
+
+.iquedev-close {
+    position:absolute;
+    font-size: 1.2em;
+    top: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #fff !important;
+    background-color: #4527A0 !important;
+    color: #fff !important;
+    font-family: monospace !important;
+    font-weight: 600;
+    cursor: pointer;
+} 
+
+.iquedev-close:hover
+{
+    background-color: #424242 !important;
+}
+
