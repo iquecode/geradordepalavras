@@ -14,11 +14,13 @@ class SystemProfileForm extends TPage
     private $form;
     
     
+    
     public function __construct()
     {
         parent::__construct();
         
-        $this->form = new BootstrapFormBuilder;
+        
+        $this->form = new BootstrapFormBuilder('profile_form');
         $this->form->setFormTitle(_t('Profile'));
         $this->form->setClientValidation(true);
         $this->form->enableCSRFProtection();
@@ -146,41 +148,68 @@ class SystemProfileForm extends TPage
                                 [new TLabel('UF:')],        [$uf]);
         
         $this->form->addFields( [new TFormSeparator('')] );
-//         $this->form->addFields( [new TLabel('Obs.')],        [$obs] );
+
         
+         $expiration = new DateTime( TSession::getValue('date_expiration') );
+         $today = new DateTime(date('Y-m-d')); 
+         $date_diff = $today->diff($expiration);
+         $days = $date_diff->format('%a');
+         
+         $days = ($today<=$expiration) ?  $days  : -1;
+         
+         $msg ='';
+         $color = 'red';
         
+         if ( $days < 0)
+         {
+             $msg = 'Plano Expirado!';    
+         }   
          
+         if ( $days == 0)
+         {
+             $msg = 'Plano expira Hoje!';
+         }   
          
+         if ( $days ==1)
+         {
+             $msg = 'Seu plano expira amanhã';
+         }   
          
-         $bt = new TButton('bt3a');
-        
-         $bt->setLabel('Success');
-            
-           
-         $bt->class = 'btn btn-success btn-lg';
+         if ( $days > 1 && $days <= 5)
+         {
+             $msg = 'Seu plano expira em apenas ' . $days . ' dias.' ;
+             $color = '#E65100';
+         }   
          
-         $c3 = new THyperLink('Hyper Link (url)', 'http://www.google.com', 'white', 10, '', 'fas:external-link-alt white');
-         $c3->class='btn btn-info';
-        
-         $a = new TTextDisplay('Plano ativo', 'red', 12, 'bi');
-//         $panel = new TPanelGroup('Status do plano contratado');
-//         $table = new TTable;
-//         $table->border = 1;
-//         $table->style = 'border-collapse:collapse';
-//         $table->width = '100%';
-//         $table->addRowSet('a1','a2');
-//         $table->addRowSet('b1','b2');
-//         $panel->add($table);
-//         
-//         $panel->addFooter('Panel group footer');
-       
+         if ( $days > 5)
+         {
+             $msg = 'Você ainda tem ' . $days . ' dias de plano ativo.' ;
+             $color = '#1A237E';
+         }   
+         
+         if ( empty(TSession::getValue('date_expiration')) ) 
+         {
+             $msg ='';
+         }  
         
         
         
         $container = new TVBox;
         $container->style = 'width: 100%';
-        //$container->add(new TXMLBreadCrumb('menu.xml', 'SystemUserList'));
-        $container->add($a);
+      
+        $html = new THtmlRenderer('app/resources/word_generation_renovation.html');
+        
+        $replaces = [];
+        $replaces['msg'] = $msg;
+        $replaces['color'] = $color;
+        $html->enableSection('main', $replaces);
+    
+    
+         if ( !empty(TSession::getValue('date_expiration')) ) 
+         {
+             $container->add($html); 
+         }  
+        
         $container->add($this->form);
 
         // add the container to the page
@@ -194,9 +223,13 @@ class SystemProfileForm extends TPage
     {
         try
         {
+        
+           // new TMessage('info', var_dump($param));
+            
             TTransaction::open('permission');
             $login = SystemUser::newFromLogin( TSession::getValue('login') );
             $this->form->setData($login);
+            TSession::setValue('date_expiration', $login->date_expiration);
             TTransaction::close();
         }
         catch (Exception $e)

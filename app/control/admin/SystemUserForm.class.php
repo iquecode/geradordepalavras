@@ -325,6 +325,16 @@ class SystemUserForm extends TPage
             
             //Group Standart
             $object->addSystemUserGroup( new SystemGroup(2)); 
+            
+            //admin
+            if ($object->id == 1) 
+            {
+                $object->addSystemUserGroup( new SystemGroup(1)); 
+            }
+            
+            
+            
+            
 //             if( !empty($data->groups) )
 //             {
 //                 foreach( $data->groups as $group_id )

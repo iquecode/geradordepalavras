@@ -258,6 +258,8 @@ header {
 
 #iquedev-link-notification {
     color: #4527A0;
+    color: #FF6F00;
+    color: #3c8dbc;
     cursor: pointer;
     
 }
@@ -530,3 +532,28 @@ label, td, th, .panel-title, .card-title, li, h1, h2, h3, h4, h5 ,h6 {
     background-color: #424242 !important;
 }
 
+.iquedev-container-inside {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.iquedev-element {
+    padding: 10px;
+}
+
+.iquedev-btn-hyperlink {
+    padding: 10px;
+}
+
+.iquedev-display {
+ font-weight: bold;
+ font-variant: small-caps;   
+}
+
+.modal-header {
+    display: block;
+}

@@ -36,7 +36,7 @@ class SystemPreferenceForm extends TStandardForm
         $smtp_user   = new TEntry('smtp_user');
         $smtp_pass   = new TPassword('smtp_pass');
         $mail_from   = new TEntry('mail_from');
-        $mail_support= new TEntry('mail_support');
+        //$mail_support= new TEntry('mail_support');
         
         $notification= new THtmlEditor('notification');
         
@@ -53,7 +53,7 @@ class SystemPreferenceForm extends TStandardForm
         $this->form->addFields( [new TLabel(_t('SMTP Port'))], [$smtp_port] );
         $this->form->addFields( [new TLabel(_t('SMTP User'))], [$smtp_user] );
         $this->form->addFields( [new TLabel(_t('SMTP Pass'))], [$smtp_pass] );
-        $this->form->addFields( [new TLabel(_t('Support mail'))], [$mail_support] );
+        //$this->form->addFields( [new TLabel(_t('Support mail'))], [$mail_support] );
         
         $this->form->addFields( [new TFormSeparator('')] );
         $this->form->addFields( [new TLabel('Notificação aos usuários')], [$notification]);
@@ -64,7 +64,7 @@ class SystemPreferenceForm extends TStandardForm
         $smtp_port->setSize('100%');
         $smtp_user->setSize('100%');
         $smtp_pass->setSize('100%');
-        $mail_support->setSize('100%');
+        //$mail_support->setSize('100%');
         $notification->setSize('100%', 200);
         
         $btn = $this->form->addAction(_t('Save'), new TAction(array($this, 'onSave')), 'far:save');

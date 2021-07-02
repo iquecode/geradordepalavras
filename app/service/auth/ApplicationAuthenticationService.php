@@ -88,6 +88,12 @@ class ApplicationAuthenticationService
         TSession::setValue('frontpage', '');
         TSession::setValue('programs',$programs);
         
+        if (!empty($user->date_expiration))
+        {
+            TSession::setValue('date_expiration',$user->date_expiration);
+        }
+        
+        
         if (!empty($user->unit))
         {
             TSession::setValue('userunitid',$user->unit->id);
