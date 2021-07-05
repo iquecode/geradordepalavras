@@ -1,9 +1,9 @@
 {
-  "short_name": "Adianti Template",
-  "name": "Adianti Template",
+  "short_name": "Gerador de Palavras",
+  "name": "Gerador de Palavras",
   "icons": [
     {
-      "src": "app/images/icon.png",
+      "src": "app/images/icon2.png",
       "type": "image/png",
       "sizes": "180x180"
     }
