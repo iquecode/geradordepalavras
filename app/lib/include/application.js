@@ -184,6 +184,19 @@ function includeNotificationMenu()
     navMenu.insertAdjacentHTML("afterbegin", content);
 }
 
+function includeAffiliateMenu()
+{
+    const navMenu = document.querySelector('.iquedev-wrapper-info-header');
+    //const onclick = 'onclick="iquedevOpenModal(' + "'iquedev-modal-notification')" + '"';
+                                                     
+
+    //let content = '<div class="nav-item dropdown"><a id="iquedev-link-notification" class="dropdown-item"><span style="padding-left:4px">Avisos</span></a></div>';
+    //let content = '<div class="nav-item dropdown"><a id="iquedev-link-notification" class="dropdown-item"><span style="padding-left:4px" ' + onclick + '>Informação para você</span></a></div>';
+    
+    let content = ' <div class="nav-item dropdown"><a href="https://go.hotmart.com/V51571436F" target="_blank" id="iquedev-link-notification" class="dropdown-item"><span style="padding-left:4px">Seja Afiliado</span></a></div> ';
+    navMenu.insertAdjacentHTML("afterbegin", content);
+}
+
 
 
 

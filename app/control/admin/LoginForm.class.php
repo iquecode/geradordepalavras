@@ -98,13 +98,32 @@ class LoginForm extends TPage
         $btn->class = 'btn btn-primary';
         $btn->style = 'height: 40px;width: 90%;display: block;margin: auto;font-size:17px;';
         
+        
+        
+        
+        $box = new TVBox;
+        $box->style = 'width 100%';
+        
+        $wrapper_tytle = new TElement('div');
+        $wrapper_tytle->style = 'display: flex;  flex-direction: column; width: 100%; justify-content: center; align-items: center; font-variant: small-caps;';
+        $title_html = new TElement('span');
+        $title_html->style = 'width: 100%; text-align: center; font-size:1.2em; color: #757575;  font-weight: bold;';
+        $title_html->add('Gerador de Palavras');
+        $wrapper_tytle->add($title_html);
+        
         $wrapper = new TElement('div');
-        $wrapper->style = 'margin:auto; margin-top:100px;max-width:460px;';
+        $wrapper->style = 'margin:auto; margin-top:50px;max-width:460px;';
         $wrapper->id    = 'login-wrapper';
         $wrapper->add($this->form);
         
+        $box->add($wrapper_tytle);
+        $box->add($wrapper);
+        
+        //parent:add($box);
+        
         // add the form to the page
-        parent::add($wrapper);
+        //parent::add($wrapper);
+        parent::add($box);
     }
     
     /**

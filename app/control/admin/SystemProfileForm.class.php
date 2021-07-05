@@ -65,6 +65,12 @@ class SystemProfileForm extends TPage
         $date_expiration->setDataBasemask('yyyy-mm-dd');
         
        
+        $name->setEditable(FALSE);
+        $email->setEditable(FALSE);
+        $login->setEditable(FALSE);
+        $cpf->setEditable(FALSE);
+        
+       
         
         $btn = $this->form->addAction( _t('Save'), new TAction(array($this, 'onSave')), 'far:save');
         $btn->class = 'btn btn-sm btn-primary';
